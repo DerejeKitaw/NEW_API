@@ -23,11 +23,11 @@ const JobSchema = new Schema({
   },
   jobNumber: {
     type: String,
-    required: true,
-    max: 40
+    required: true
   },
   customerName: {
-    type: String
+    type: String,
+    required: true
   },
   address: {
     city: String,
@@ -35,18 +35,44 @@ const JobSchema = new Schema({
     houseNumber: String,
     state: String
   },
-  jobDate: {
-    type: Date
-  },
-  status: {
+  preparedBy: {
     type: String,
     required: true
   },
-  preparedBy: {
-    type: [String],
-    required: true
+  jobInformation: {
+    jobDate: {
+      type: Date
+    },
+    status: {
+      type: String,
+      required: true
+    },
+    filter: {
+      type: String
+    },
   },
-
+  electrical: {
+    undergroundCunduitLength: {
+      type: String,
+      required: true
+    },
+    unFusedAcDisconectAdditional: {
+      type: String,
+      required: true
+    },
+    fusedAcDisconect: {
+      type: String,
+      required: true
+    },
+    fusedAcDisconectFuse: {
+      type: String,
+      required: true
+    },
+    interconnection: {
+      type: String,
+      required: true
+    }
+  },
   siteAssesment: {
     mainPanel: {
       Size: {
@@ -74,38 +100,25 @@ const JobSchema = new Schema({
         required: true
       }
     },
-    isGeneratorExist: {
-      type: String,
-      required: true
-    },
-    partialHouseGenerator: {
-      type: Boolean,
-      default: false
-    },
-    partialHouseGeneratorFuse: {
-      type: String
-    },
-    undergroundCunduitLength: {
-      type: String
-    },
-    unFusedAcDisconectAdditional: {
-      type: String
-    },
-    fusedAcDisconect: {
-      type: String
-    },
-    fusedAcDisconectFuse: {
-      type: String
-    },
-    interconnection: {
-      type: String
+    generator: {
+      isGeneratorExist: {
+        type: String,
+        required: true
+      },
+      partialHouseGenerator: {
+        type: Boolean,
+        default: false
+      },
+      partialHouseGeneratorFuse: {
+        type: String
+      }
     }
   },
   comments: [
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: "users"
       },
       text: {
         type: String,
