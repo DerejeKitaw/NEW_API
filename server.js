@@ -5,6 +5,10 @@ const passport = require('passport');
 const path = require('path');
 
 const users = require('./routes/api/users');
+const jobs = require('./routes/api/jobs');
+const inverters = require('./routes/api/inverters');
+const optimizers = require('./routes/api/optimizers');
+const panels = require('./routes/api/panels');
 
 const app = express();
 
@@ -29,6 +33,10 @@ require('./config/passport')(passport);
 
 // Use Routes
 app.use('/api/users', users);
+app.use('/api/jobs', jobs);
+app.use('/api/inverters', inverters);
+app.use('/api/panels', panels);
+app.use('/api/optimizers', optimizers);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
