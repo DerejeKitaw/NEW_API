@@ -8,7 +8,7 @@ module.exports = function validateInverterInput(data) {
   data.inverterType = !isEmpty(data.inverterType) ? data.inverterType : '';
   data.maxPowerOutput = !isEmpty(data.maxPowerOutput) ? data.maxPowerOutput : '';
   data.acOutputVoltage = !isEmpty(data.acOutputVoltage) ? data.acOutputVoltage : '';
-  data.maxAcCurrentOutpu = !isEmpty(data.maxAcCurrentOutpu) ? data.maxAcCurrentOutpu : '';
+  data.maxAcCurrentOutput = !isEmpty(data.maxAcCurrentOutput) ? data.maxAcCurrentOutput : '';
   data.maxDcVoltage = !isEmpty(data.maxDcVoltage) ? data.maxDcVoltage : '';
   data.startupVoltage = !isEmpty(data.startupVoltage) ? data.startupVoltage : '';
   data.cec = !isEmpty(data.cec) ? data.cec : '';
@@ -26,8 +26,8 @@ module.exports = function validateInverterInput(data) {
   if (Validator.isEmpty(data.acOutputVoltage)) {
     errors.acOutputVoltage = 'AC Out put Voltage field is required';
   }
-  if (Validator.isEmpty(data.maxAcCurrentOutpu)) {
-    errors.maxAcCurrentOutpu = 'max AC Current Outpu field is required';
+  if (Validator.isEmpty(data.maxAcCurrentOutput)) {
+    errors.maxAcCurrentOutput = 'max AC Current Output field is required';
   }
   if (Validator.isEmpty(data.maxDcVoltage)) {
     errors.maxDcVoltage = 'max Dc Voltage field is required';

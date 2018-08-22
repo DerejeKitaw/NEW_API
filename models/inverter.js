@@ -19,7 +19,7 @@ const InverterSchema = new Schema({
     type: String,
     required: true
   },
-  maxAcCurrentOutpu: {
+  maxAcCurrentOutput: {
     type: String,
     required: true
   },
