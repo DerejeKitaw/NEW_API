@@ -12,7 +12,6 @@ module.exports = function validateInverterInput(data) {
   data.maxDcVoltage = !isEmpty(data.maxDcVoltage) ? data.maxDcVoltage : '';
   data.startupVoltage = !isEmpty(data.startupVoltage) ? data.startupVoltage : '';
   data.cec = !isEmpty(data.cec) ? data.cec : '';
-  data.inverterType = !isEmpty(data.inverterType) ? data.inverterType : '';
  
   if (Validator.isEmpty(data.inverterManufacturer)) {
     errors.inverterManufacturer = 'Inverter Manufacturer field is required';
