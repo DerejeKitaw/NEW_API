@@ -18,9 +18,6 @@ module.exports = function validatePanelInput(data) {
   if (Validator.isEmpty(data.panelManufacturer)) {
     errors.panelManufacturer = 'panel Manufacturer field is required';
   }
-
-  if (Validator.isEmpty(data.panelManufacturer)) {
-  }
   if (Validator.isEmpty(data.panelType)) {
     errors.panelType = 'panelType Output field is required';
   }
