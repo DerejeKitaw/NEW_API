@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 class Landing extends Component {
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
+      this.props.history.push('/projects');
     }
   }
 
@@ -17,7 +17,7 @@ class Landing extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
-                <h1 className="display-3 mb-4">PV Desiner</h1>
+                <h1 className="display-3 mb-4">PV Designer</h1>
                 <p className="lead">
                   {' '}
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas eveniet magni, corrupti ex at exercitationem ad quo possimus porro voluptatum modi sunt doloribus aperiam error fugit omnis suscipit. Vero, accusantium.
