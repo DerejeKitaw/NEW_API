@@ -41,4 +41,4 @@ const InverterSchema = new Schema({
   }
 });
 
-module.exports = Inverter = mongoose.model('inverterss', InverterSchema);
+module.exports = Inverter = mongoose.model('inverters', InverterSchema);
