@@ -15,19 +15,39 @@ const User = require('../../models/User');
 // @access Public
 router.get('/test', (req, res) => res.json({ msg: 'inverter Works' }));
 
-// @route  GET api/inverters/:id
-// @desc   Get one inverter route
-// @access private
+// @route  GET api/inverters/
+// @desc   Get All inverter route
+// @access public
 router.get(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => res.json({ msg: 'inverters /:id Works' })
+  '/',
+  (req, res) => {
+    const errors = {};
+    Inverter.find()
+      .then(inverters => res.json(inverters))
+      .catch(errors => res.status(404).json({ noInverterFound: ' No inverter found' }));
+  }
 );
 
-// @route  GET api/inverters/all
-// @desc   Get all inverters route
+// @route  GET api/inverters/:id
+// @desc   Get one inverter route
 // @access public
-router.get('/all', (req, res) => res.json({ msg: 'inverters /all Works' }));
+router.get('/:id', (req, res) => {
+  const errors = {};
+
+  Inverter.findOne({ _id : req.params.id })
+    .then(inverter => {
+      if (!inverter) {
+        // res.json({ msg: `getting ${inverter}` })
+        error.noInverter = 'There is no saved inverter';
+        res.status(404).json(errors);
+      }
+      res.json(inverter);
+    })
+    .catch(errors =>
+  res.status(404).json({inverter: 'The is no inverter'}))
+});
+
+
 
 // @route  POST api/inverters
 // @desc   update(IfExist)/Create(IfNotExist) inverter route
@@ -82,12 +102,10 @@ router.post(
       }
     );
     // Create
-    // const newInverter = new Inverter(inverterFields);
-    // newInverter.save()
-    //   .then(inverter => res.json(inverter));
-    // Search for inverterType - if exist Edit it
+    const newInverter = new Inverter(inverterFields);
+    newInverter.save()
+      .then(inverter => res.json(inverter));
 
-    // Search for inverterType - if do not exist create it
 
     // res.json({ msg: 'inverters create or update  Works' });
   }
