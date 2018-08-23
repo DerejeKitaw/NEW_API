@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 class Dashboard extends Component {
@@ -11,19 +11,41 @@ class Dashboard extends Component {
     // Check if logged in user has profile data
     dashboardContent = (
       <div>
-        <p className="lead text-muted">
-          Welcome {user.name}
-        </p>
+        <p className="lead text-muted">Welcome {user.name}</p>
       </div>
-    )
+    );
     // User is logged in but has no profile
     dashboardContent = (
       <div>
-        <p className="lead text-muted">Welcome {user.name}</p>
-        <p>You have not yet setup a projects, please add some project</p>
+      <div className="card">
+        <div className="card-header">Featured</div>
+        <div className="card-body">
+          <h5 className="card-title">Special title treatment</h5>
+          <p className="card-text">
+            With supporting text below as a natural lead-in to additional
+            content.
+          </p>
+          <a href="#" className="btn btn-primary">
+            See Inverters
+          </a>
+          </div>
+        </div>
+        <div className="card">
+        <div className="card-header">Featured</div>
+        <div className="card-body">
+          <h5 className="card-title">Special title treatment</h5>
+          <p className="card-text">
+            With supporting text below as a natural lead-in to additional
+            content.
+          </p>
+          <a href="#" className="btn btn-primary">
+            See Panels
+          </a>
+        </div>
+      </div>
       </div>
     );
-    
+
     return (
       <div className="dashboard">
         <div className="container">
@@ -40,12 +62,13 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth
 });
-export default connect(mapStateToProps, {   })(
-  Dashboard
-);
+export default connect(
+  mapStateToProps,
+  {}
+)(Dashboard);
