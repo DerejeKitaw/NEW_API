@@ -19,6 +19,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Projects from './components/project/Projects';
 import NotFound from './components/not-found/NotFound';
+import Dashboard from './components/dashboard/Dashboard';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -53,6 +54,9 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/not-found" component={NotFound} />
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
               <Switch>
                 <PrivateRoute exact path="/projects" component={Projects} />
               </Switch>

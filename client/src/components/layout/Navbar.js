@@ -64,6 +64,7 @@ class Navbar extends Component {
           <Link className="navbar-brand" to="/">
             Generator
           </Link>
+         
           <button
             className="navbar-toggler"
             type="button"
