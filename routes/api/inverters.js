@@ -18,15 +18,14 @@ router.get('/test', (req, res) => res.json({ msg: 'inverter Works' }));
 // @route  GET api/inverters/
 // @desc   Get All inverter route
 // @access public
-router.get(
-  '/',
-  (req, res) => {
-    const errors = {};
-    Inverter.find()
-      .then(inverters => res.json(inverters))
-      .catch(errors => res.status(404).json({ noInverterFound: ' No inverter found' }));
-  }
-);
+router.get('/', (req, res) => {
+  const errors = {};
+  Inverter.find()
+    .then(inverters => res.json(inverters))
+    .catch(errors =>
+      res.status(404).json({ noInverterFound: ' No inverter found' })
+    );
+});
 
 // @route  GET api/inverters/:id
 // @desc   Get one inverter route
@@ -34,7 +33,7 @@ router.get(
 router.get('/:id', (req, res) => {
   const errors = {};
 
-  Inverter.findOne({ _id : req.params.id })
+  Inverter.findOne({ _id: req.params.id })
     .then(inverter => {
       if (!inverter) {
         // res.json({ msg: `getting ${inverter}` })
@@ -43,11 +42,8 @@ router.get('/:id', (req, res) => {
       }
       res.json(inverter);
     })
-    .catch(errors =>
-  res.status(404).json({inverter: 'The is no inverter'}))
+    .catch(errors => res.status(404).json({ inverter: 'The is no inverter' }));
 });
-
-
 
 // @route  POST api/inverters
 // @desc   update(IfExist)/Create(IfNotExist) inverter route
@@ -86,26 +82,20 @@ router.post(
         { inverterType: req.body.inverterType },
         { inverterManufacturer: req.body.inverterManufacturer }
       ]
-    })
-    .then(
-      inverterType => {
-        if (inverterType) {
-          // Update
-          Inverter.findOneAndUpdate(
-            { inverterType: req.body.inverterType },
-            { $set: inverterFields },
-            { new: true }
-          ).then(inverter => res.json(inverter));
-        } else {
-          
-        }
+    }).then(inverterType => {
+      if (inverterType) {
+        // Update
+        Inverter.findOneAndUpdate(
+          { inverterType: req.body.inverterType },
+          { $set: inverterFields },
+          { new: true }
+        ).then(inverter => res.json(inverter));
+      } else {
       }
-    );
+    });
     // Create
     const newInverter = new Inverter(inverterFields);
-    newInverter.save()
-      .then(inverter => res.json(inverter));
-
+    newInverter.save().then(inverter => res.json(inverter));
 
     // res.json({ msg: 'inverters create or update  Works' });
   }
@@ -117,16 +107,13 @@ router.post(
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  (req, res) => res.json({ msg: 'inverters /:id Works' })
-);
+  (req, res) => {
+    Inverter.findOne({ _id: req.params.id })
+      .then(inverter => {
+        inverter.remove().then(() => res.json({ success: true }));
+      })
+      .catch(errors => res.status(404).json({ inverterNotFound: 'Inverter not found' }));
+  });
 
-// @route  POST api/inverters/edit/:id
-// @desc   Edit inverters route
-// @access private
-router.post(
-  '/edit/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => res.json({ msg: 'inverters edit/:id Works' })
-);
 
 module.exports = router;
