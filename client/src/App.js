@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser, logoutUser } from './actions/authActions';
+import { setCurrentUser, logoutUser } from './store/actions/authActions';
 
 import './styles/styles.css';
 // Redux
 import { Provider } from 'react-redux';
-import store from './store';
-
+import store from './store/store';
+import { addInverter } from './store/actions/inverterActions';
+import getVisibleInverters from './store/selectors/inverters';
 // Components
 import PrivateRoute from './components/common/PrivateRoute';
 
@@ -18,8 +19,10 @@ import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Projects from './components/project/Projects';
-import NotFound from './components/not-found/NotFound';
+import NotFound from './components/common/not-found/NotFound';
 import Dashboard from './components/dashboard/Dashboard';
+import Inverters from './components/inverters/Inverters';
+import EditInverterPage from './components/inverters/EditInverterPage';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -41,6 +44,10 @@ if (localStorage.jwtToken) {
     window.location.href = '/login';
   }
 }
+// const state = store.getState();
+// console.log(state.inverters);
+// const visibleInverters = getVisibleInverters(state.inverters, state.filters);
+// console.log(visibleInverters);
 
 class App extends Component {
   render() {
@@ -56,6 +63,12 @@ class App extends Component {
               <Route exact path="/not-found" component={NotFound} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/inverters" component={Inverters} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/inverter/edit/:id" component={EditInverterPage} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/projects" component={Projects} />
