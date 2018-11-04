@@ -1,0 +1,11 @@
+{
+  "inverterManufacturer": "SOLAREDGE",
+  "inverterType": "SE3000A - US",
+  "maxDcVoltage": "500",
+  "maxPowerOutput": "3000",
+  "acOutputVoltage": "240",
+  "maxAcCurrentOutput": "32",
+  "startupVoltage": "cec: 97.5",
+  "cec": "97.5",
+  "date": "2018-11-04T03:40:27.523Z"
+}
